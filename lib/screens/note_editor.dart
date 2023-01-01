@@ -50,10 +50,9 @@ class _NoteEditorState extends State<NoteEditor> {
   @override
   void initState() {
     super.initState();
-    _titleTextController
-        .addListener(() => _note.title = _titleTextController.text);
-    _contentTextController
-        .addListener(() => _note.content = _contentTextController.text);
+
+    // _contentTextController
+    // .addListener(() => _note.content = _contentTextController.text);
   }
 
   @override
@@ -91,6 +90,9 @@ class _NoteEditorState extends State<NoteEditor> {
               child: Scaffold(
                 key: _scaffoldKey,
                 appBar: AppBar(
+                  actions: [
+                    IconButton(onPressed: _save, icon: Icon(Icons.save))
+                  ],
                   bottom: const PreferredSize(
                     preferredSize: Size(0, 24),
                     child: SizedBox(),
@@ -228,15 +230,37 @@ class _NoteEditorState extends State<NoteEditor> {
     );
   }
 
-  /// Callback before the user leave the editor.
-  Future<bool> _onPop(String uid) async {
-    if (_isDirty) {
+  _save() async {
+    // print(_note.id);
+    _note.title = _titleTextController.text;
+    print(_note.title);
+    _note.content = _contentTextController.text;
+    print(_contentTextController.text);
+    try {
       await supabase
           .from('notes')
           .update({'title': _note.title, 'content': _note.content}).match(
               {'id': _note.id});
-      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Successful'),
+              actions: [
+                TextButton(
+                    onPressed: (() => Navigator.pop(context)),
+                    child: Text("OK"))
+              ],
+            );
+          });
+    } catch (e) {
+      context.showSnackBar(message: e.toString());
     }
+  }
+
+  /// Callback before the user leave the editor.
+  Future<bool> _onPop(String uid) async {
     return Future.value(true);
   }
 

@@ -8,14 +8,14 @@ import 'package:utility_manager_flutter/widgets/Notes_body.dart';
 
 import '../models/note.dart';
 
-class TodoPage extends StatefulWidget {
-  const TodoPage({Key? key}) : super(key: key);
+class NotesPage extends StatefulWidget {
+  const NotesPage({Key? key}) : super(key: key);
 
   @override
-  _TodoPageState createState() => _TodoPageState();
+  _NotesPageState createState() => _NotesPageState();
 }
 
-class _TodoPageState extends State<TodoPage> {
+class _NotesPageState extends State<NotesPage> {
   late final Stream<List<Note>> notesStream;
   TextEditingController titleController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
@@ -47,11 +47,14 @@ class _TodoPageState extends State<TodoPage> {
 
   @override
   void initState() {
-    initUser();
+    // initUser();
+    supabase.auth.refreshSession();
+    final email = supabase.auth.currentUser?.email;
+    print(email);
     notesStream = supabase
         .from('notes')
         .stream(primaryKey: ['id'])
-        .eq('email', supabase.auth.currentUser!.email)
+        .eq('email', email)
         .map((maps) => maps.map((map) => Note.fromMap(map)).toList());
     // fetchNotes();
     super.initState();
@@ -285,7 +288,8 @@ class _TodoPageState extends State<TodoPage> {
                               titleController.text = "";
                               context.showSnackBar(
                                   message: "Successfully inserted!");
-                              Navigator.pushReplacementNamed(context, '/home');
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, '/home', (route) => false);
                             },
                           ),
                         )

@@ -8,6 +8,7 @@ import 'package:utility_manager_flutter/screens/home.dart';
 import 'package:utility_manager_flutter/screens/login.dart';
 import 'package:utility_manager_flutter/screens/signUp.dart';
 import 'package:utility_manager_flutter/screens/splash_screen.dart';
+import 'package:utility_manager_flutter/utils/constants.dart';
 import 'package:utility_manager_flutter/utils/theme.dart';
 
 void main() {
@@ -27,8 +28,25 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // @override
+  User? user;
+  @override
+  void initState() {
+    // TODO: implement initState
+    final session = supabase.auth.currentSession;
+    if (session != null) {
+      // supabase.auth.refreshSession();
+      user = supabase.auth.currentUser;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -43,7 +61,7 @@ class MyApp extends StatelessWidget {
       theme: theme,
       initialRoute: '/',
       routes: {
-        '/': (_) => SplashScreen(),
+        '/': (_) => user == null ? Login() : Home(),
         // '/login': (_) => Signup(),
         '/account': (_) => AccountPage(),
         '/addDetails': (_) => AddUserDetails(),

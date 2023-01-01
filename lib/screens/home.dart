@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: index == 0 ? TodoPage() : AccountPage(),
+      body: index == 0 ? NotesPage() : AccountPage(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
         onTap: (int val) {

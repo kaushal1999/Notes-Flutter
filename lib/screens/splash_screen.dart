@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
 import 'package:utility_manager_flutter/utils/constants.dart';
 
@@ -24,9 +21,11 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
-  Future<void> _redirect() async {
+  _redirect() {
     // await for for the widget to mount
-    await Future.delayed(Duration.zero);
+
+    // await Future.delayed(Duration.zero);
+    print('fun');
 
     final session = supabase.auth.currentSession;
     if (session == null) {
@@ -45,17 +44,20 @@ class _SplashScreenState extends State<SplashScreen> {
     //   } else {
     //   }
     // });
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Add Your Code here.
+      _redirect();
+    });
     super.initState();
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     // });
     // Timer(Duration(seconds: 6), (() => initUser()));
 // ;
-    _redirect();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("build");
     return Scaffold(
       body: ListView(
         children: [
