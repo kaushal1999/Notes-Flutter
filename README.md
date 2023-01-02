@@ -20,4 +20,3 @@ This app is made with Flutter and Supabase which allows user to add Note, set co
 
 # Demo
 
-<img src="readme-assets/auth.gif" width="200">
