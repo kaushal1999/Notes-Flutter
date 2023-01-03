@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:utility_manager_flutter/utils/constants.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -10,49 +11,25 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  void initUser() {
-    if (supabase.auth.currentSession != null) {
-      // supabase.auth.refreshSession();
-      // print(supabase.auth.currentUser);
-      // _user = supabase.auth.currentUser;
-      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-    } else {
-      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
-    }
-  }
+  void _restoreSession() async {
+    final prefs = await SharedPreferences.getInstance();
+    final session = prefs.getString('user');
 
-  _redirect() {
-    // await for for the widget to mount
-
-    // await Future.delayed(Duration.zero);
-    print('fun');
-
-    final session = supabase.auth.currentSession;
     if (session == null) {
-      Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+      Navigator.pushReplacementNamed(context, '/login');
     } else {
-      Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+      final response = await supabase.auth.recoverSession(session);
+
+      prefs.setString('user', response.session!.persistSessionString);
+
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 
   @override
   void initState() {
-    // Timer(Duration(seconds: 3), () {
-    //   // dart
-    //   final Session? session = supabase.auth.currentSession;
-    //   if (session == null) {
-    //   } else {
-    //   }
-    // });
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Add Your Code here.
-      _redirect();
-    });
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    // });
-    // Timer(Duration(seconds: 6), (() => initUser()));
-// ;
+    _restoreSession();
   }
 
   @override
@@ -64,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Lottie.asset('assets/splash.json'),
           Center(
             child: Text(
-              "Utility Manager",
+              "Notes",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30,

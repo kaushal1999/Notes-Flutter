@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
 import 'package:utility_manager_flutter/utils/constants.dart';
 import 'package:utility_manager_flutter/widgets/rounded_button.dart';
@@ -19,8 +20,11 @@ class _LoginState extends State<Login> {
     final email = _emailController.text;
     final password = _passwordController.text;
     try {
-      await supabase.auth.signInWithPassword(email: email, password: password);
-      Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+      final result = await supabase.auth
+          .signInWithPassword(email: email, password: password);
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('user', result.session!.persistSessionString);
+      Navigator.of(context).pushReplacementNamed('/home');
     } on AuthException catch (error) {
       context.showErrorSnackBar(message: error.message);
     } catch (error) {
@@ -57,14 +61,6 @@ class _LoginState extends State<Login> {
           padding: EdgeInsets.symmetric(vertical: 18, horizontal: 12),
           children: [
             Lottie.asset('assets/email.json'),
-            // Text(
-            //   'Sign in via the magic link with your email',
-            //   style: TextStyle(
-            //     color: Colors.white,
-            //     fontSize: 20,
-            //   ),
-            // ),
-            // SizedBox(height: 18),
             TextFormField(
               controller: _emailController,
               decoration: new InputDecoration(
@@ -104,6 +100,7 @@ class _LoginState extends State<Login> {
               ),
               style: TextStyle(color: Colors.white),
             ),
+            SizedBox(height: 18),
             RoundedButtonWidget(
               buttonText: 'Sign in',
               width: MediaQuery.of(context).size.width * 0.80,

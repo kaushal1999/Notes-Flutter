@@ -29,6 +29,7 @@ dependencies:
 
   # supabase_flutter: ^1.2.2
   supabase_flutter: ^1.2.2
+  shared_preferences: ^2.0.15
   # webview_flutter: ^4.0.0
   
   # webview_flutter: ^4.0.0

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:utility_manager_flutter/screens/account_page.dart';
-import 'package:utility_manager_flutter/screens/add_user_details.dart';
 import 'package:utility_manager_flutter/screens/home.dart';
 import 'package:utility_manager_flutter/screens/login.dart';
 import 'package:utility_manager_flutter/screens/signUp.dart';
@@ -36,14 +35,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // @override
   User? user;
-  @override
-  void initState() {
-    // TODO: implement initState
+
+  initUser() async {
     final session = supabase.auth.currentSession;
     if (session != null) {
-      // supabase.auth.refreshSession();
-      user = supabase.auth.currentUser;
+      await supabase.auth.refreshSession();
+      user = supabase.auth.currentSession!.user;
     }
+  }
+
+  @override
+  void initState() {
+    // initUser();
     super.initState();
   }
 
@@ -61,10 +64,8 @@ class _MyAppState extends State<MyApp> {
       theme: theme,
       initialRoute: '/',
       routes: {
-        '/': (_) => user == null ? Login() : Home(),
-        // '/login': (_) => Signup(),
+        '/': (_) => SplashScreen(),
         '/account': (_) => AccountPage(),
-        '/addDetails': (_) => AddUserDetails(),
         '/home': (_) => Home(),
         '/signup': (_) => Signup(),
         '/login': (_) => Login(),
