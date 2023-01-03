@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:utility_manager_flutter/models/note.dart';
 import 'package:utility_manager_flutter/utils/constants.dart';
-import 'package:utility_manager_flutter/widgets/styles.dart';
+import 'package:utility_manager_flutter/utils/styles.dart';
 
 import '../widgets/color_picker.dart';
 import '../widgets/note_actions.dart';
@@ -28,7 +28,6 @@ class _NoteEditorState extends State<NoteEditor> {
   /// otherwise a new one will be created.
   _NoteEditorState(Note note)
       : this._note = note,
-        _originNote = note,
         this._titleTextController = TextEditingController(text: note.title),
         this._contentTextController = TextEditingController(text: note.content);
 
@@ -36,7 +35,6 @@ class _NoteEditorState extends State<NoteEditor> {
   final Note _note;
 
   /// The origin copy before editing
-  final Note _originNote;
   String get _noteColor => _note.color;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -45,14 +43,10 @@ class _NoteEditorState extends State<NoteEditor> {
   final TextEditingController _contentTextController;
 
   /// If the note is modified.
-  bool get _isDirty => _note != _originNote;
 
   @override
   void initState() {
     super.initState();
-
-    // _contentTextController
-    // .addListener(() => _note.content = _contentTextController.text);
   }
 
   @override
@@ -90,6 +84,12 @@ class _NoteEditorState extends State<NoteEditor> {
               child: Scaffold(
                 key: _scaffoldKey,
                 appBar: AppBar(
+                  title: Center(
+                      child: Text(
+                    'Edit your Note',
+                    style: TextStyle(color: Colors.black),
+                  )),
+                  backgroundColor: Color(0XFFAD6C98),
                   actions: [
                     IconButton(onPressed: _save, icon: Icon(Icons.save))
                   ],

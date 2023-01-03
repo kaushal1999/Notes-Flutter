@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:utility_manager_flutter/providers/fetch_user_details_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:utility_manager_flutter/utils/constants.dart';
 import 'package:utility_manager_flutter/widgets/rounded_button.dart';
 
@@ -17,6 +16,8 @@ class _AccountPageState extends State<AccountPage> {
     //   context.showErrorSnackBar(message: error.message);
     //   return;
     // }
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
 
     Navigator.of(context).pushReplacementNamed('/login');
   }

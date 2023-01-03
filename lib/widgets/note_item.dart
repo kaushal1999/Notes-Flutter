@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:utility_manager_flutter/widgets/styles.dart';
+import 'package:utility_manager_flutter/utils/styles.dart';
 
 import '../models/note.dart';
 

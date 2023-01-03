@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:supabase/supabase.dart';
-import 'package:utility_manager_flutter/components/auth_state.dart';
 import 'package:utility_manager_flutter/utils/constants.dart';
 import 'package:utility_manager_flutter/widgets/rounded_button.dart';
 
