@@ -15,7 +15,6 @@ ThemeData theme = ThemeData(
         0XFFAD6C98,
       ),
     ),
-    brightness: Brightness.light,
   ),
   indicatorColor: Color(0XFFAD6C98),
   textSelectionTheme: TextSelectionThemeData(

@@ -6,7 +6,7 @@
 
 
    <application
-        android:label="utility_manager_flutter"
+        android:label="Notes"
         android:icon="@mipmap/ic_launcher">
         <service
           android:name="io.flutter.plugins.androidalarmmanager.AlarmService"

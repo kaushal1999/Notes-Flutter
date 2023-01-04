@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:utility_manager_flutter/screens/AddNote.dart';
 import 'package:utility_manager_flutter/screens/account_page.dart';
 import 'package:utility_manager_flutter/screens/home.dart';
 import 'package:utility_manager_flutter/screens/login.dart';
@@ -53,7 +54,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
+      SystemUiOverlayStyle.dark.copyWith(
           statusBarColor: Color(0XFFAD6C98),
           statusBarIconBrightness: Brightness.light,
           statusBarBrightness: Brightness.light),
@@ -69,6 +70,7 @@ class _MyAppState extends State<MyApp> {
         '/home': (_) => Home(),
         '/signup': (_) => Signup(),
         '/login': (_) => Login(),
+        '/addNote': (_) => AddNote()
       },
     );
   }

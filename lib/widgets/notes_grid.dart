@@ -26,24 +26,27 @@ class NotesGrid extends StatelessWidget {
   //     );
 
   @override
-  Widget build(BuildContext context) => CustomScrollView(slivers: [
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          sliver: SliverGrid(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200.0,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 10.0,
-              childAspectRatio: 1 / 1.2,
-            ),
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) =>
-                  _noteItem(context, notes[index]),
-              childCount: notes.length,
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(top: 8, bottom: 8),
+        child: CustomScrollView(slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            sliver: SliverGrid(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200.0,
+                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 10.0,
+                childAspectRatio: 1 / 1.2,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) =>
+                    _noteItem(context, notes[index]),
+                childCount: notes.length,
+              ),
             ),
           ),
-        ),
-      ]);
+        ]),
+      );
 
   Widget _noteItem(BuildContext context, Note note) => InkWell(
         onTap: () {
