@@ -18,11 +18,14 @@ class _SplashScreenState extends State<SplashScreen> {
     if (session == null) {
       Navigator.pushReplacementNamed(context, '/login');
     } else {
-      final response = await supabase.auth.recoverSession(session);
-
-      prefs.setString('user', response.session!.persistSessionString);
-
-      Navigator.pushReplacementNamed(context, '/home');
+      try {
+        final response = await supabase.auth.recoverSession(session);
+        prefs.setString('user', response.session!.persistSessionString);
+        Navigator.pushReplacementNamed(context, '/home');
+      } on Exception {
+        prefs.clear();
+        Navigator.pushReplacementNamed(context, '/login');
+      }
     }
   }
 
@@ -43,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Text(
               "Notes",
               style: TextStyle(
-                color: Colors.white,
+                // color: Colors.white,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
@@ -56,11 +59,10 @@ class _SplashScreenState extends State<SplashScreen> {
             child: SizedBox(
               width: 300.0,
               child: LinearProgressIndicator(
-                backgroundColor: Color(0XFFBAAAB9),
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  Color(0XFFAD6C98),
-                ),
-              ),
+                  // backgroundColor: Color(0XFFBAAAB9),
+                  // valueColor: AlwaysStoppedAnimation<Color>(
+                  // Color(0XFFAD6C98),
+                  ),
             ),
           ),
         ],

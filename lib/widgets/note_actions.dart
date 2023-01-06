@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:utility_manager_flutter/utils/constants.dart';
-import 'package:utility_manager_flutter/utils/styles.dart';
 
 import '../models/note.dart';
 
@@ -22,7 +21,7 @@ class NoteActions extends StatelessWidget {
     // final uid = supabase.auth.currentUser!.id;
 
     final textStyle = TextStyle(
-      color: kHintTextColorLight,
+      // color: kHintTextColorLight,
       fontSize: 16,
     );
 
@@ -59,12 +58,11 @@ class NoteActions extends StatelessWidget {
 
         ListTile(
           leading: const Icon(Icons.delete_outline),
-          title: Text('Delete', style: textStyle),
+          title: Text('Delete'),
           onTap: () async {
-            Navigator.pop(context);
-            await supabase.from('notes').delete().match({'id': id});
+            await _deleteNote(context, id);
             Navigator.pushNamedAndRemoveUntil(
-                contxt, '/home', (route) => false);
+                context, '/home', (route) => false);
           },
         ),
 //        if (id != null) ListTile(
@@ -90,5 +88,27 @@ class NoteActions extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Future<void> _deleteNote(BuildContext context, int id) async {
+    await supabase.from('notes').delete().match({'id': id});
+
+    return showDialog(
+        context: context,
+        builder: ((context) {
+          return AlertDialog(
+            title: Text('Success!'),
+            actions: [
+              Center(
+                child: TextButton(
+                  child: Text('ok'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              )
+            ],
+          );
+        }));
   }
 }

@@ -48,7 +48,7 @@ class _AccountPageState extends State<AccountPage> {
               Text(
                 (supabase.auth.currentUser?.email)!,
                 style: TextStyle(
-                  color: Colors.white,
+                  // color: Colors.white,
                   fontSize: 30,
                 ),
               ),

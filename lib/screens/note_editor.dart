@@ -1,13 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:utility_manager_flutter/models/note.dart';
 import 'package:utility_manager_flutter/utils/constants.dart';
 import 'package:utility_manager_flutter/utils/styles.dart';
 
-import '../widgets/color_picker.dart';
 import '../widgets/note_actions.dart';
 
 /// The editor of a [Note], also shows every detail about a single note.
@@ -35,7 +33,6 @@ class _NoteEditorState extends State<NoteEditor> {
   final Note _note;
 
   /// The origin copy before editing
-  String get _noteColor => _note.color;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   // StreamSubscription<Note> _noteSubscription;
@@ -66,88 +63,62 @@ class _NoteEditorState extends State<NoteEditor> {
       child: Consumer<Note>(
         builder: (_, __, ___) => Hero(
           tag: 'NoteItem${_note.id}',
-          child: Theme(
-            data: Theme.of(context).copyWith(
-              primaryColor: Color(int.parse(_noteColor)),
-              appBarTheme: Theme.of(context).appBarTheme.copyWith(
-                    elevation: 0,
-                  ),
-              scaffoldBackgroundColor: Color(int.parse(_noteColor)),
-              bottomAppBarColor: Color(int.parse(_noteColor)),
+          child: Scaffold(
+            // backgroundColor: Colors.white,
+            key: _scaffoldKey,
+            appBar: AppBar(
+              // backgroundColor: Colors.white,
+              title: Center(
+                  child: Text(
+                'Edit your Note',
+                // style: TextStyle(color: Color(0XFFAD6C98)),
+              )),
+              actions: [IconButton(onPressed: _save, icon: Icon(Icons.save))],
             ),
-            child: AnnotatedRegion<SystemUiOverlayStyle>(
-              value: SystemUiOverlayStyle.dark.copyWith(
-                statusBarColor: Color(int.parse(_noteColor)),
-                systemNavigationBarColor: Color(int.parse(_noteColor)),
-                systemNavigationBarIconBrightness: Brightness.dark,
-              ),
-              child: Scaffold(
-                key: _scaffoldKey,
-                appBar: AppBar(
-                  title: Center(
-                      child: Text(
-                    'Edit your Note',
-                    style: TextStyle(color: Colors.black),
-                  )),
-                  backgroundColor: Color(0XFFAD6C98),
-                  actions: [
-                    IconButton(onPressed: _save, icon: Icon(Icons.save))
-                  ],
-                  bottom: const PreferredSize(
-                    preferredSize: Size(0, 24),
-                    child: SizedBox(),
-                  ),
-                ),
-                body: _buildBody(context, uid),
-                bottomNavigationBar: _buildBottomAppBar(context),
-              ),
-            ),
+            body: _buildBody(context, uid),
+            bottomNavigationBar: _buildBottomAppBar(context),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildBody(BuildContext context, String uid) => DefaultTextStyle(
-        style: kNoteTextLargeLight,
-        child: WillPopScope(
-          onWillPop: () => _onPop(uid),
-          child: Container(
-            height: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: SingleChildScrollView(
-              child: _buildNoteDetail(),
-            ),
-          ),
-        ),
+  Widget _buildBody(BuildContext context, String uid) => SingleChildScrollView(
+        child: _buildNoteDetail(),
       );
 
-  Widget _buildNoteDetail() => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          TextField(
-            controller: _titleTextController,
-            style: kNoteTitleLight,
-            decoration: const InputDecoration(
-              hintText: 'Title',
-              border: InputBorder.none,
-              counter: const SizedBox(),
+  Widget _buildNoteDetail() => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14),
+        child: Column(
+          // mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            TextField(
+              controller: _titleTextController,
+              decoration: const InputDecoration(
+                hintText: 'Title',
+                counter: const SizedBox(),
+              ),
+              maxLines: null,
+              maxLength: 1024,
+              textCapitalization: TextCapitalization.sentences,
+              readOnly: false,
             ),
-            maxLines: null,
-            maxLength: 1024,
-            textCapitalization: TextCapitalization.sentences,
-            readOnly: false,
-          ),
-          const SizedBox(height: 14),
-          TextField(
-            controller: _contentTextController,
-            style: kNoteTextLargeLight,
-            decoration: const InputDecoration.collapsed(hintText: 'Note'),
-            maxLines: null,
-            textCapitalization: TextCapitalization.sentences,
-            readOnly: false,
-          ),
-        ],
+            const SizedBox(height: 14),
+            TextField(
+              toolbarOptions: ToolbarOptions(
+                  copy: true, cut: true, paste: true, selectAll: true),
+              maxLines: 10,
+              // mouseCursor: MouseCursor.defer,
+              // minLines: null,
+              controller: _contentTextController,
+              decoration: const InputDecoration(hintText: 'Note'),
+              // expands: true,
+              textCapitalization: TextCapitalization.sentences,
+              readOnly: false,
+            ),
+          ],
+        ),
       );
 
   // List<Widget> _buildTopActions(BuildContext context, String uid) => [
@@ -195,7 +166,7 @@ class _NoteEditorState extends State<NoteEditor> {
               // Text('Edited ${_note.da}'),
               IconButton(
                 icon: const Icon(Icons.more_vert),
-                color: kIconTintLight,
+                // color: kIconTintLight,
                 onPressed: () => _showNoteBottomSheet(context),
               ),
             ],
@@ -206,12 +177,12 @@ class _NoteEditorState extends State<NoteEditor> {
   void _showNoteBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Color(int.parse(_noteColor)),
+      // backgroundColor: Color(int.parse(_noteColor)),
       builder: (context) => ChangeNotifierProvider.value(
         value: _note,
         child: Consumer<Note>(
           builder: (_, note, __) => Container(
-            color: Color(int.parse(note.color)),
+            // color: Color(int.parse(note.color)),
             padding: const EdgeInsets.symmetric(vertical: 19),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -219,8 +190,8 @@ class _NoteEditorState extends State<NoteEditor> {
                 NoteActions(
                   contxt: context,
                 ),
-                const SizedBox(height: 16),
-                LinearColorPicker(),
+                // const SizedBox(height: 16),
+                // LinearColorPicker(),
                 const SizedBox(height: 12),
               ],
             ),

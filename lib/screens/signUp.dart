@@ -74,18 +74,18 @@ class _SignupState extends State<Signup> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide: BorderSide(
-                    color: Theme.of(context).accentColor,
-                  ),
+                      // color: Theme.of(context).accentColor,
+                      ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide: BorderSide(
-                    color: Theme.of(context).primaryColor,
-                  ),
+                      // color: Theme.of(context).primaryColor,
+                      ),
                 ),
                 hintText: 'Email',
               ),
-              style: TextStyle(color: Colors.white),
+              // style: TextStyle(color: Colors.white),
             ),
             SizedBox(height: 18),
             TextFormField(
@@ -94,18 +94,18 @@ class _SignupState extends State<Signup> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide: BorderSide(
-                    color: Theme.of(context).accentColor,
-                  ),
+                      // color: Theme.of(context).accentColor,
+                      ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide: BorderSide(
-                    color: Theme.of(context).primaryColor,
-                  ),
+                      // color: Theme.of(context).primaryColor,
+                      ),
                 ),
                 hintText: 'Password',
               ),
-              style: TextStyle(color: Colors.white),
+              // style: TextStyle(color: Colors.white),
             ),
             SizedBox(
               height: 18,

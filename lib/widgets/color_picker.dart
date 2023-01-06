@@ -26,7 +26,7 @@ class LinearColorPicker extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Color(int.parse(color)),
                 shape: BoxShape.circle,
-                border: Border.all(color: kColorPickerBorderColor),
+                border: Border.all(),
               ),
               child: color == _currColor(note)
                   ? const Icon(Icons.check, color: kColorPickerBorderColor)

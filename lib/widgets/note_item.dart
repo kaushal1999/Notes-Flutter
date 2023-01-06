@@ -21,9 +21,7 @@ class NoteItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: Color(int.parse(note.color)),
               borderRadius: BorderRadius.all(Radius.circular(8)),
-              border: (note.color) == "0xFFFFFFFF"
-                  ? Border.all(color: kBorderColorLight)
-                  : null,
+              border: (note.color) == "0xFFFFFFFF" ? Border.all() : null,
             ),
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
             child: Column(

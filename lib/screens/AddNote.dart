@@ -18,7 +18,7 @@ class _AddNoteState extends State<AddNote> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
         // backgroundColor: Color(0XFFAD6C98),
         title: Text('Add your Note'),
@@ -39,18 +39,18 @@ class _AddNoteState extends State<AddNote> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide(
-                        color: Theme.of(context).accentColor,
-                      ),
+                          // color: Theme.of(context).accentColor,
+                          ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide(
-                        color: Theme.of(context).primaryColor,
-                      ),
+                          // color: Theme.of(context).primaryColor,
+                          ),
                     ),
                     hintText: 'title',
                   ),
-                  style: TextStyle(color: Colors.black),
+                  // style: TextStyle(color: Colors.black),
                 ),
               ),
               SizedBox(height: 20),
@@ -67,18 +67,18 @@ class _AddNoteState extends State<AddNote> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide(
-                        color: Theme.of(context).accentColor,
-                      ),
+                          // color: Theme.of(context).accentColor,
+                          ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide(
-                        color: Theme.of(context).primaryColor,
-                      ),
+                          // color: Theme.of(context).primaryColor,
+                          ),
                     ),
                     hintText: 'description',
                   ),
-                  style: TextStyle(color: Colors.black),
+                  // style: TextStyle(color: Colors.black),
                 ),
               ),
               SizedBox(height: 20),

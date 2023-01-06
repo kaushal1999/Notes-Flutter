@@ -10,7 +10,7 @@ extension ShowSnackBar on BuildContext {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Color(0XFFAD6C98),
+        // backgroundColor: Color(0XFFAD6C98),
         behavior: SnackBarBehavior.floating,
         elevation: 1.0,
       ),

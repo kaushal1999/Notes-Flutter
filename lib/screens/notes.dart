@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:utility_manager_flutter/screens/note_editor.dart';
 import 'package:utility_manager_flutter/utils/constants.dart';
 import 'package:utility_manager_flutter/widgets/notes_grid.dart';
-import 'package:utility_manager_flutter/widgets/rounded_button.dart';
 
 import '../models/note.dart';
 
@@ -41,7 +38,7 @@ class _NotesPageState extends State<NotesPage> {
   Widget build(BuildContext context) {
     final email = supabase.auth.currentUser!.email;
     return Scaffold(
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         appBar: AppBar(
           // backgroundColor: Color(0XFFAD6C98),
           title: Center(
@@ -57,7 +54,7 @@ class _NotesPageState extends State<NotesPage> {
             },
             icon: Icon(
               Icons.add_circle,
-              size: 35,
+              size: 45,
             ),
           ),
         ),

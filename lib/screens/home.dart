@@ -28,9 +28,6 @@ class _HomeState extends State<Home> {
             index = val;
           });
         },
-        backgroundColor: Theme.of(context).accentColor,
-        selectedItemColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         items: [
           BottomNavigationBarItem(
