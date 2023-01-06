@@ -8,12 +8,6 @@ This app is made with Flutter and Supabase which allows user to add Note, set co
 
 
 
-# Usage of Supabase in this app
-
-- Supabase Auth
-- Supabase Storage
-- Supabase Database
-- Supabase Realtime
 
 
 
@@ -47,4 +41,19 @@ This app is made with Flutter and Supabase which allows user to add Note, set co
 </p>
 
 
+## Web
+<p>
+  <img src="https://github.com/kaushal1999/Notes-Flutter/blob/master/ReadMe_assets/web/Screenshot%20from%202023-01-06%2023-11-56.png" width="350">
+  <img src="https://github.com/kaushal1999/Notes-Flutter/blob/master/ReadMe_assets/web/Screenshot%20from%202023-01-06%2023-12-31.png" width="350">
+  <img src="https://github.com/kaushal1999/Notes-Flutter/blob/master/ReadMe_assets/web/Screenshot%20from%202023-01-06%2023-12-46.png" width="350">
+  
+  
+</p>
 
+
+# Usage of Supabase in this app
+
+- Supabase Auth
+- Supabase Storage
+- Supabase Database
+- Supabase Realtime
