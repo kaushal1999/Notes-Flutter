@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:utility_manager_flutter/screens/AddNote.dart';
@@ -34,7 +33,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // @override
+  bool useMaterial3 = true;
+  ThemeMode themeMode = ThemeMode.light;
+  ThemingWay themingWay = ThemingWay.road10;
+
   User? user;
 
   initUser() async {
@@ -47,22 +49,21 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // initUser();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.dark.copyWith(
-          statusBarColor: Color(0XFFAD6C98),
-          statusBarIconBrightness: Brightness.light,
-          statusBarBrightness: Brightness.light),
-    );
+    // SystemChrome.setSystemUIOverlayStyle(
+    //   SystemUiOverlayStyle.dark.copyWith(
+    //       statusBarColor: Color(0XFFAD6C98),
+    //       statusBarIconBrightness: Brightness.light,
+    //       statusBarBrightness: Brightness.light),
+    // );
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: theme,
+      theme: themingWay.theme(Brightness.dark, useMaterial3),
       initialRoute: '/',
       routes: {
         '/': (_) => SplashScreen(),
