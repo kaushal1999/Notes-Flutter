@@ -1,6 +1,6 @@
 
 
-# Multi-Platform(Android, ios, Mac, Linux, Windows, Web) Notes taking Flutter App with realtime synchronization between devices.
+# Multi-Platform(Android, ios, Mac, Linux, Windows, Web) Note taking Flutter App with realtime synchronization between devices.
 
 This app is made with Flutter and Supabase which allows user to add Note, set color to separate notes.  
 
