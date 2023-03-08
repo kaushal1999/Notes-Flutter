@@ -189,6 +189,7 @@ class _NoteEditorState extends State<NoteEditor> {
               children: <Widget>[
                 NoteActions(
                   contxt: context,
+                  txt: _note.content,
                 ),
                 // const SizedBox(height: 16),
                 // LinearColorPicker(),

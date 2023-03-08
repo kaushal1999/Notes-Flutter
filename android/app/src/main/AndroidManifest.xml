@@ -6,7 +6,7 @@
 
 
    <application
-        android:label="Notes"
+        android:label="MultiNote"
         android:icon="@mipmap/ic_launcher">
         <service
           android:name="io.flutter.plugins.androidalarmmanager.AlarmService"
@@ -17,13 +17,16 @@
             android:exported="false"/>
         <receiver
             android:name="io.flutter.plugins.androidalarmmanager.RebootBroadcastReceiver"
-            android:enabled="false">
-            <intent-filter>
+            android:enabled="false"
+            android:exported="false" >
+
+       <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

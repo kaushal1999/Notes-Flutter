@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 
 import 'package:utility_manager_flutter/utils/constants.dart';
 
@@ -9,10 +10,9 @@ import '../models/note.dart';
 /// Provide actions for a single [Note], used in a [BottomSheet].
 class NoteActions extends StatelessWidget {
   final BuildContext contxt;
-  const NoteActions({
-    Key? key,
-    required this.contxt,
-  }) : super(key: key);
+  final String txt;
+  const NoteActions({Key? key, required this.contxt, required this.txt})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final note = Provider.of<Note>(context);
@@ -83,6 +83,7 @@ class NoteActions extends StatelessWidget {
         //         )),
         //   ),
         ListTile(
+          onTap: () => Share.share(txt),
           leading: const Icon(Icons.share),
           title: Text('Send', style: textStyle),
         ),
