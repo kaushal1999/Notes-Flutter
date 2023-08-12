@@ -1,4 +1,4 @@
-
+PlayStore link: https://play.google.com/store/apps/details?id=com.kaushal.multinote
 
 # Multi-Platform(Android, ios, Mac, Linux, Windows, Web) Note taking Flutter App with realtime synchronization between devices.
 
